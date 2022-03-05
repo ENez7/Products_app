@@ -14,37 +14,42 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          const SliverCustomAppBar(title: 'Productos CRUD'),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return Container(
-                  color: const Color(0xFFE5E5E5),
-                  child: const Center(
-                    child: SingleChildScrollView(
-                      child: ColumnData(),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        body: CustomScrollView(
+          slivers: [
+            const SliverCustomAppBar(title: 'Productos CRUD'),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return Container(
+                    color: const Color(0xFFE5E5E5),
+                    child: const Center(
+                      child: SingleChildScrollView(
+                        child: ColumnData(),
+                      ),
                     ),
-                  ),
-                );
-              },
-              childCount: 1,
+                  );
+                },
+                childCount: 1,
+              ),
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Text(
+            '+',
+            style: TextStyle(
+              fontSize: 36,
+              color: Colors.white,
             ),
           ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Text(
-          '+',
-          style: TextStyle(
-            fontSize: 36,
-            color: Colors.black,
-          ),
+          backgroundColor: ConstColors.buttons,
         ),
-        backgroundColor: ConstColors.buttons,
       ),
     );
   }

@@ -2,12 +2,16 @@ import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'textfields/searchbar_tf.dart';
+
 class SearchBar extends StatelessWidget {
   const SearchBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final _mediaQuery = MediaQuery.of(context).size;
+    final _textController = TextEditingController();
+
     return Center(
       child: Container(
         margin: const EdgeInsets.only(
@@ -28,22 +32,24 @@ class SearchBar extends StatelessWidget {
           ],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 10.0,
-              ),
-              child: Text(
-                'Buscar por ID o nombre',
-                textAlign: TextAlign.left,
-                style: GoogleFonts.roboto(
-                  textStyle: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                    color: ConstColors.fonts,
-                  ),
-                ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     left: 10.0,
+            //   ),
+            //   child: TextFormField(
+            //     decoration: InputDecoration(
+            //       hintText: 'HOlabola',
+            //       labelText: 'LAS',
+            //     ),
+            //   ),
+            // ),
+            SizedBox(
+              width: _mediaQuery.width * 0.7,
+              child: CustomTF(
+                controller: _textController,
+                hintText: 'Buscar por nombre o ID',
               ),
             ),
             Spacer(),
@@ -51,10 +57,11 @@ class SearchBar extends StatelessWidget {
               onPressed: () {},
               child: Icon(Icons.search),
               style: ElevatedButton.styleFrom(
-                  primary: ConstColors.buttons,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  )),
+                primary: ConstColors.buttons,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
           ],
         ),
