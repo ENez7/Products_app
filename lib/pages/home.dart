@@ -1,7 +1,8 @@
+import 'package:ecommerce_platform/widgets/search_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:ecommerce_platform/widgets/products_card.dart';
 import 'package:ecommerce_platform/widgets/sliverappbar.dart';
-import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -58,6 +59,7 @@ class ColumnData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const [
+        SearchBar(),
         ProductsCard(
           productName: '',
           productPrice: '',
