@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTF extends StatelessWidget {
   final TextEditingController controller;
@@ -19,6 +20,10 @@ class CustomTF extends StatelessWidget {
       child: TextField(
         controller: controller,
         // maxLines: 3,
+        // maxLength: 20,
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(20),
+        ],
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,
