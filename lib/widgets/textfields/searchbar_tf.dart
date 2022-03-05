@@ -19,8 +19,6 @@ class CustomTF extends StatelessWidget {
       padding: EdgeInsets.only(left: 15.0, top: 1),
       child: TextField(
         controller: controller,
-        // maxLines: 3,
-        // maxLength: 20,
         inputFormatters: [
           LengthLimitingTextInputFormatter(20),
         ],

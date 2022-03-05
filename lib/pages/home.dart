@@ -66,32 +66,40 @@ class ColumnData extends StatelessWidget {
       children: const [
         SearchBar(),
         ProductsCard(
-          productName: '',
-          productPrice: '',
+          productName: 'Producto',
+          productPrice: 'Bs. 145.00',
+          productDescription:
+              'alkjdkjashdkjahsdlkjahsdkljhaskldjhalskdjhaslkdjhajkshdkajhdslkjashdkl',
         ),
         ProductsCard(
           productName: '',
           productPrice: '',
+          productDescription: '',
         ),
         ProductsCard(
           productName: '',
           productPrice: '',
+          productDescription: '',
         ),
         ProductsCard(
           productName: '',
           productPrice: '',
+          productDescription: '',
         ),
         ProductsCard(
           productName: '',
           productPrice: '',
+          productDescription: '',
         ),
         ProductsCard(
           productName: '',
           productPrice: '',
+          productDescription: '',
         ),
         ProductsCard(
           productName: '',
           productPrice: '',
+          productDescription: '',
         ),
       ],
     );

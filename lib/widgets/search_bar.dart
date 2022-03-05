@@ -32,19 +32,7 @@ class SearchBar extends StatelessWidget {
           ],
         ),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(
-            //     left: 10.0,
-            //   ),
-            //   child: TextFormField(
-            //     decoration: InputDecoration(
-            //       hintText: 'HOlabola',
-            //       labelText: 'LAS',
-            //     ),
-            //   ),
-            // ),
             SizedBox(
               width: _mediaQuery.width * 0.7,
               child: CustomTF(
