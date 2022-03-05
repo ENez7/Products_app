@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Productos',
       initialRoute: '/',
+      debugShowCheckedModeBanner: false,
       routes: Rutas.paginas,
     );
   }

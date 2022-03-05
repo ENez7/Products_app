@@ -3,6 +3,6 @@ import 'package:ecommerce_platform/pages/home.dart';
 
 class Rutas {
   static final paginas = <String, WidgetBuilder>{
-    '/': (BuildContext context) => HomePage(),
+    '/': (BuildContext context) => const HomePage(),
   };
 }

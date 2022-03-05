@@ -16,8 +16,8 @@ class SliverCustomAppBar extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       floating: true,
-      expandedHeight: 150,
-      collapsedHeight: 100,
+      expandedHeight: 120,
+      collapsedHeight: 70,
       backgroundColor: backgroundColor,
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
