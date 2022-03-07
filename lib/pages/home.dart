@@ -4,6 +4,9 @@ import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:ecommerce_platform/widgets/products_card.dart';
 import 'package:ecommerce_platform/widgets/sliverappbar.dart';
 
+import '../data/streamdata.dart';
+import '../models/product.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -27,9 +30,14 @@ class _HomePageState extends State<HomePage> {
                 (context, index) {
                   return Container(
                     color: const Color(0xFFE5E5E5),
-                    child: const Center(
+                    child: Center(
                       child: SingleChildScrollView(
-                        child: ColumnData(),
+                        child: Column(
+                          children: [
+                            SearchBar(),
+                            _productsCardLV(getProducts()),
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -53,6 +61,29 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Future<List<Product>> getProducts() async {
+    Stream<Product> stream = StreamData.productStream(7);
+    List<Product> productos = [];
+    await for (Product producto in stream) {
+      productos.add(producto);
+    }
+    return productos;
+  }
+
+  ListView _productsCardLV(data) {
+    return ListView.builder(
+      itemCount: data.length,
+      itemBuilder: (context, index) {
+        return ProductsCard(
+          productName: data[index].productName,
+          productPrice: data[index].productPrice,
+          productDescription: data[index].productDescription,
+          productImage: data[index].productImage,
+        );
+      },
+    );
+  }
 }
 
 class ColumnData extends StatelessWidget {
@@ -69,7 +100,7 @@ class ColumnData extends StatelessWidget {
           productName: 'Producto',
           productPrice: 'Bs. 145.00',
           productDescription:
-              'alkjdkjashdkjahsdlkjahsdkljhaskldjhalskdjhaslkdjhajkshdkajhdslkjashdkl',
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at eros sed purus pulvinar egestas.',
         ),
         ProductsCard(
           productName: '',

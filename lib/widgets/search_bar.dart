@@ -1,8 +1,6 @@
-import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'textfields/searchbar_tf.dart';
+import 'package:ecommerce_platform/constants/colors.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({Key? key}) : super(key: key);
