@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecommerce_platform/data/streamdata.dart';
-import 'package:ecommerce_platform/pages/cubits/cubit/homecubit_cubit.dart';
+import 'package:ecommerce_platform/pages/cubits/homecubit_cubit.dart';
 import 'package:ecommerce_platform/widgets/search_bar.dart';
 import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:ecommerce_platform/widgets/products_card.dart';
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   return Container(
-                    color: const Color(0xFFE5E5E5),
+                    color: ConstColors.background,
                     child: Column(
                       children: [
                         SearchBar(),

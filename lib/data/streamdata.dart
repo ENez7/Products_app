@@ -14,7 +14,7 @@ class StreamData {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at eros sed purus pulvinar egestas.',
       );
       // print('xd');
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: 400));
       yield product;
     }
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ecommerce_platform/pages/cubits/cubit/homecubit_cubit.dart';
+import 'package:ecommerce_platform/pages/cubits/homecubit_cubit.dart';
 
 import 'routes/routes.dart';
 
