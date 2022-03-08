@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:ecommerce_platform/models/product.dart';
 
@@ -12,7 +13,8 @@ class StreamData {
         productDescription:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at eros sed purus pulvinar egestas.',
       );
-      Future.delayed(Duration(seconds: 2));
+      // print('xd');
+      await Future.delayed(Duration(seconds: 1));
       yield product;
     }
   }

@@ -1,10 +1,12 @@
-import 'package:ecommerce_platform/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ecommerce_platform/data/streamdata.dart';
+import 'package:ecommerce_platform/pages/cubits/cubit/homecubit_cubit.dart';
+import 'package:ecommerce_platform/widgets/search_bar.dart';
 import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:ecommerce_platform/widgets/products_card.dart';
 import 'package:ecommerce_platform/widgets/sliverappbar.dart';
 
-import '../data/streamdata.dart';
 import '../models/product.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +19,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    List<Product> products = [];
+    final dataCubit = context.read<HomeCubit>();
+    dataCubit.initState();
+    dataCubit.loadDataInList(StreamData.productStream(7), products);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
@@ -30,15 +37,22 @@ class _HomePageState extends State<HomePage> {
                 (context, index) {
                   return Container(
                     color: const Color(0xFFE5E5E5),
-                    child: Center(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            SearchBar(),
-                            _productsCardLV(getProducts()),
-                          ],
+                    child: Column(
+                      children: [
+                        SearchBar(),
+                        BlocBuilder<HomeCubit, HomeCubitState>(
+                          builder: (_, state) {
+                            switch (state.runtimeType) {
+                              case HomeCubitLoadingState:
+                                return CircularProgressIndicator();
+                              case HomeCubitLoadedState:
+                                return _getListWidgets(products);
+                              default:
+                                return Text('No se que mambo');
+                            }
+                          },
                         ),
-                      ),
+                      ],
                     ),
                   );
                 },
@@ -62,77 +76,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<List<Product>> getProducts() async {
-    Stream<Product> stream = StreamData.productStream(7);
-    List<Product> productos = [];
-    await for (Product producto in stream) {
-      productos.add(producto);
-    }
-    return productos;
-  }
-
-  ListView _productsCardLV(data) {
-    return ListView.builder(
-      itemCount: data.length,
-      itemBuilder: (context, index) {
-        return ProductsCard(
-          productName: data[index].productName,
-          productPrice: data[index].productPrice,
-          productDescription: data[index].productDescription,
-          productImage: data[index].productImage,
-        );
-      },
-    );
-  }
-}
-
-class ColumnData extends StatelessWidget {
-  const ColumnData({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  // CREATE A COLUMN BASED ON LIST OF PRODUCTS
+  Widget _getListWidgets(List<Product> lstItens) {
     return Column(
-      children: const [
-        SearchBar(),
-        ProductsCard(
-          productName: 'Producto',
-          productPrice: 'Bs. 145.00',
-          productDescription:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at eros sed purus pulvinar egestas.',
-        ),
-        ProductsCard(
-          productName: '',
-          productPrice: '',
-          productDescription: '',
-        ),
-        ProductsCard(
-          productName: '',
-          productPrice: '',
-          productDescription: '',
-        ),
-        ProductsCard(
-          productName: '',
-          productPrice: '',
-          productDescription: '',
-        ),
-        ProductsCard(
-          productName: '',
-          productPrice: '',
-          productDescription: '',
-        ),
-        ProductsCard(
-          productName: '',
-          productPrice: '',
-          productDescription: '',
-        ),
-        ProductsCard(
-          productName: '',
-          productPrice: '',
-          productDescription: '',
-        ),
-      ],
-    );
+        children: lstItens
+            .map((product) => ProductsCard(
+                productName: product.productName,
+                productPrice: product.productPrice,
+                productDescription: product.productDescription))
+            .toList());
   }
 }

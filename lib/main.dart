@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ecommerce_platform/pages/cubits/cubit/homecubit_cubit.dart';
 
 import 'routes/routes.dart';
 
@@ -12,14 +14,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Productos',
-      initialRoute: '/',
-      debugShowCheckedModeBanner: false,
-      routes: Rutas.paginas,
-      theme: ThemeData(
-        textTheme: GoogleFonts.robotoTextTheme(
-          Theme.of(context).textTheme,
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (_) => HomeCubit())],
+      child: MaterialApp(
+        title: 'Productos',
+        initialRoute: '/',
+        debugShowCheckedModeBanner: false,
+        routes: Rutas.paginas,
+        theme: ThemeData(
+          textTheme: GoogleFonts.robotoTextTheme(
+            Theme.of(context).textTheme,
+          ),
         ),
       ),
     );
