@@ -1,20 +1,15 @@
 import 'package:ecommerce_platform/constants/colors.dart';
+import 'package:ecommerce_platform/models/product.dart';
 import 'package:flutter/material.dart';
 
 class ProductsCard extends StatelessWidget {
-  final String productName;
-  final String productPrice;
-  final String productDescription;
-  final String? productImage;
+  final Product product;
   final VoidCallback? onTap;
   final bool disabled;
 
   const ProductsCard({
     Key? key,
-    required this.productName,
-    required this.productPrice,
-    required this.productDescription,
-    this.productImage,
+    required this.product,
     this.onTap,
     this.disabled = false,
   }) : super(key: key);
@@ -42,9 +37,9 @@ class ProductsCard extends StatelessWidget {
           children: [
             ImageContainer(),
             DataContainer(
-              productName: productName,
-              productPrice: productPrice,
-              productDescription: productDescription,
+              productName: product.productName,
+              productPrice: product.productPrice,
+              productDescription: product.productDescription,
             ),
           ],
         ),

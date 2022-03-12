@@ -1,13 +1,14 @@
+import 'package:ecommerce_platform/pages/product.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecommerce_platform/data/streamdata.dart';
-import 'package:ecommerce_platform/pages/cubits/homecubit_cubit.dart';
-import 'package:ecommerce_platform/widgets/search_bar.dart';
+import 'package:ecommerce_platform/widgets/search_bar.widget.dart';
 import 'package:ecommerce_platform/constants/colors.dart';
-import 'package:ecommerce_platform/widgets/products_card.dart';
-import 'package:ecommerce_platform/widgets/sliverappbar.dart';
+import 'package:ecommerce_platform/widgets/products_card.widget.dart';
+import 'package:ecommerce_platform/widgets/sliverappbar.widget.dart';
 
 import '../models/product.dart';
+import 'cubits/home/homecubit_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     List<Product> products = [];
     final dataCubit = context.read<HomeCubit>();
     dataCubit.initState();
-    dataCubit.loadDataInList(StreamData.productStream(7), products);
+    dataCubit.loadDataInList(StreamData.productStream(10), products);
 
     return GestureDetector(
       onTap: () {
@@ -44,11 +45,23 @@ class _HomePageState extends State<HomePage> {
                           builder: (_, state) {
                             switch (state.runtimeType) {
                               case HomeCubitLoadingState:
-                                return CircularProgressIndicator();
+                                return SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.75,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
                               case HomeCubitLoadedState:
                                 return _getListWidgets(products);
                               default:
-                                return Text('No se que mambo');
+                                return SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.75,
+                                  child: Center(
+                                    child: Text('Sin datos'),
+                                  ),
+                                );
                             }
                           },
                         ),
@@ -77,13 +90,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   // CREATE A COLUMN BASED ON LIST OF PRODUCTS
-  Widget _getListWidgets(List<Product> lstItens) {
+  Widget _getListWidgets(List<Product> items) {
     return Column(
-        children: lstItens
+        children: items
             .map((product) => ProductsCard(
-                productName: product.productName,
-                productPrice: product.productPrice,
-                productDescription: product.productDescription))
+                  product: product,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => ProductPage(product: product),
+                      ),
+                    );
+                  },
+                ))
             .toList());
   }
 }

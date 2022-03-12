@@ -3,11 +3,13 @@ import 'package:ecommerce_platform/constants/colors.dart';
 
 class SliverCustomAppBar extends StatelessWidget {
   final String title;
+  final bool implyLeading;
   final Color? backgroundColor;
 
   const SliverCustomAppBar({
     Key? key,
     required this.title,
+    this.implyLeading = false,
     this.backgroundColor = ConstColors.appBar,
   }) : super(key: key);
 
@@ -18,6 +20,7 @@ class SliverCustomAppBar extends StatelessWidget {
       floating: true,
       expandedHeight: 120,
       collapsedHeight: 70,
+      automaticallyImplyLeading: implyLeading,
       backgroundColor: backgroundColor,
       flexibleSpace: FlexibleSpaceBar(
         title: Text(

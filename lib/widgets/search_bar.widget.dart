@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'textfields/searchbar_tf.dart';
+import 'textfields/searchbar_tf.widget.dart';
 import 'package:ecommerce_platform/constants/colors.dart';
 
 class SearchBar extends StatelessWidget {

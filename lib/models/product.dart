@@ -3,12 +3,16 @@ class Product {
   final String productPrice;
   final String productDescription;
   final String? productImage;
+  final int? quantity;
+  final String? id;
 
   Product({
     required this.productName,
     required this.productPrice,
     required this.productDescription,
     this.productImage,
+    this.quantity,
+    this.id,
   });
 
   factory Product.fromJSON(json) {
@@ -17,6 +21,8 @@ class Product {
       productPrice: json['productPrice'],
       productDescription: json['productDescription'],
       productImage: json['productImage'],
+      quantity: json['quantity'],
+      id: json['id'],
     );
   }
 
@@ -24,12 +30,16 @@ class Product {
       {String? prodName,
       String? prodPrice,
       String? prodDesc,
-      String? prodImg}) {
+      String? prodImg,
+      int? qty,
+      String? id}) {
     return Product(
       productName: prodName ?? productName,
       productPrice: prodPrice ?? productPrice,
       productDescription: prodDesc ?? productDescription,
       productImage: prodImg ?? productImage,
+      quantity: qty ?? quantity,
+      id: id ?? this.id,
     );
   }
 }

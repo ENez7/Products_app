@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce_platform/models/product.dart';
 

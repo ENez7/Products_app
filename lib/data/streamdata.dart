@@ -12,6 +12,8 @@ class StreamData {
         productPrice: 'Bs. ${100 + rand.nextInt(100)}.00',
         productDescription:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at eros sed purus pulvinar egestas.',
+        quantity: 10 + rand.nextInt(90),
+        id: '1683069414',
       );
       // print('xd');
       await Future.delayed(Duration(milliseconds: 400));
