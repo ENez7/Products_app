@@ -75,7 +75,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed('/form');
+          },
           child: const Text(
             '+',
             style: TextStyle(

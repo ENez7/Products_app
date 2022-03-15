@@ -1,4 +1,5 @@
 import 'package:ecommerce_platform/constants/colors.dart';
+import 'package:ecommerce_platform/constants/shadows.dart';
 import 'package:ecommerce_platform/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -25,13 +26,7 @@ class ProductsCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: Colors.white,
-          boxShadow: const [
-            BoxShadow(
-              color: ConstColors.shadow,
-              blurRadius: 10,
-              offset: Offset(0, 10),
-            ),
-          ],
+          boxShadow: CustomShadows.getContainerShadow(),
         ),
         child: Row(
           children: [

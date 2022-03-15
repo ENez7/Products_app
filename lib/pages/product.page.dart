@@ -1,9 +1,6 @@
 import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:ecommerce_platform/models/product.dart';
-import 'package:ecommerce_platform/widgets/products_card.widget.dart';
-import 'package:ecommerce_platform/widgets/sliverappbar.widget.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/product_card.widget.dart';
 
 class ProductPage extends StatelessWidget {
