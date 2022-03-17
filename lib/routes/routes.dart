@@ -6,6 +6,6 @@ import '../pages/form.page.dart';
 class Rutas {
   static final paginas = <String, WidgetBuilder>{
     '/': (context) => const HomePage(),
-    '/form': (context) => const FormPage(),
+    '/form': (context) => FormPage(),
   };
 }

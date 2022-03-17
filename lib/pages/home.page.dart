@@ -1,4 +1,5 @@
 import 'package:ecommerce_platform/pages/product.page.dart';
+import 'package:ecommerce_platform/services/api.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecommerce_platform/data/streamdata.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     List<Product> products = [];
     final dataCubit = context.read<HomeCubit>();
     dataCubit.initState();
-    dataCubit.loadDataInList(StreamData.productStream(10), products);
+    dataCubit.loadDataInList(ApiService.getProducts(), products);
 
     return GestureDetector(
       onTap: () {
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
       },
       child: Scaffold(
         body: CustomScrollView(
+          physics: BouncingScrollPhysics(),
           slivers: [
             const SliverCustomAppBar(title: 'Productos CRUD'),
             SliverList(

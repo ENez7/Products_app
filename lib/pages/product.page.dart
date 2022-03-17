@@ -1,5 +1,6 @@
 import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:ecommerce_platform/models/product.dart';
+import 'package:ecommerce_platform/pages/form.page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/product_card.widget.dart';
 
@@ -36,7 +37,16 @@ class ProductPage extends StatelessWidget {
                       width: 110,
                       height: 46,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // TODO: Add put logic
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => FormPage(
+                                product: product,
+                              ),
+                            ),
+                          );
+                        },
                         child: Text(
                           'Editar',
                           style: TextStyle(
@@ -52,7 +62,10 @@ class ProductPage extends StatelessWidget {
                       width: 110,
                       height: 46,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // TODO: Add delete logic
+                          Navigator.of(context).pop();
+                        },
                         child: Text(
                           'Eliminar',
                           style: TextStyle(
