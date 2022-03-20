@@ -25,7 +25,7 @@ class _FormPageState extends State<FormPage> {
     productNameController.text = widget.product?.productName ?? '';
     productDescriptionController.text =
         widget.product?.productDescription ?? '';
-    productPriceController.text = widget.product?.productPrice ?? '';
+    productPriceController.text = widget.product?.productPrice.toString() ?? '';
     productStockController.text = widget.product?.quantity.toString() ?? '';
     productImgController.text = widget.product?.productImage ?? '';
     if (productNameController.text != '') exists = true;

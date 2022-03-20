@@ -1,8 +1,8 @@
+import 'package:ecommerce_platform/data/streamdata.dart';
 import 'package:ecommerce_platform/pages/product.page.dart';
 import 'package:ecommerce_platform/services/api.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ecommerce_platform/data/streamdata.dart';
 import 'package:ecommerce_platform/widgets/search_bar.widget.dart';
 import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:ecommerce_platform/widgets/products_card.widget.dart';
@@ -19,12 +19,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Product> products = [];
   @override
   Widget build(BuildContext context) {
-    List<Product> products = [];
     final dataCubit = context.read<HomeCubit>();
-    dataCubit.initState();
-    dataCubit.loadDataInList(ApiService.getProducts(), products);
+    if (products.isEmpty) {
+      dataCubit.loadDataInList(
+          StreamData.streamFuture(ApiService.getProductsResponse()), products);
+    }
 
     return GestureDetector(
       onTap: () {
@@ -46,14 +48,6 @@ class _HomePageState extends State<HomePage> {
                         BlocBuilder<HomeCubit, HomeCubitState>(
                           builder: (_, state) {
                             switch (state.runtimeType) {
-                              case HomeCubitLoadingState:
-                                return SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.75,
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                );
                               case HomeCubitLoadedState:
                                 return _getListWidgets(products);
                               default:
@@ -61,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.75,
                                   child: Center(
-                                    child: Text('Sin datos'),
+                                    child: CircularProgressIndicator(),
                                   ),
                                 );
                             }
@@ -77,6 +71,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: 'h1',
           onPressed: () {
             Navigator.of(context).pushNamed('/form');
           },
@@ -94,19 +89,26 @@ class _HomePageState extends State<HomePage> {
   }
 
   // CREATE A COLUMN BASED ON LIST OF PRODUCTS
-  Widget _getListWidgets(List<Product> items) {
-    return Column(
-        children: items
-            .map((product) => ProductsCard(
-                  product: product,
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => ProductPage(product: product),
-                      ),
-                    );
-                  },
-                ))
-            .toList());
+  Widget _getListWidgets(List<Product> products) {
+    return products.isEmpty
+        ? Column(
+            children: const [Text('No data')],
+          )
+        : Column(
+            children: products
+                .map(
+                  (product) => ProductsCard(
+                    product: product,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => ProductPage(product: product),
+                        ),
+                      );
+                    },
+                  ),
+                )
+                .toList(),
+          );
   }
 }

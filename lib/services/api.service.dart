@@ -1,30 +1,47 @@
 import 'dart:convert';
-
-import '../models/product.dart';
+import 'dart:developer';
+import 'package:ecommerce_platform/models/product.dart';
+import 'package:ecommerce_platform/services/response.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const _getUrl =
-      'https://functiongetproducts.azurewebsites.net/api/products';
-  static const _getByIdUrl =
-      'https://functiongetbyidproducts.azurewebsites.net/api/products/';
-  static const _postUrl =
-      'https://functionpostproducts.azurewebsites.net/api/products';
-  static const _deleteUrl =
-      'https://functiondeleteproducts.azurewebsites.net/api/products/';
+  // LINK CONSULTAS
+  static const _request =
+      'https://functionentradaproducts.azurewebsites.net/api/products/';
 
-  static Future<List<dynamic>> getProducts() async {
-    final response = await http.get(Uri.parse(_getUrl), headers: {
-      'Content-Type': 'application/json',
-    });
-    if (response.statusCode == 200) {
-      final jsonResponse = json.decode(response.body);
-      final List<dynamic> products = jsonResponse['data'];
-      print('---------PRODUCTO');
-      print(products[0]);
-      return products;
-    } else {
-      throw Exception('Failed to load products');
+  static Future<void> getProductsRequest() async {
+    var req = await http.get(Uri.parse(_request));
+    Future.delayed(Duration(seconds: 10));
+    print('------REQUEST------');
+    print(req.statusCode);
+    return;
+  }
+  // LINK RESPUESTAS
+
+  static const _getResponse =
+      'https://webapisalidaproducts.azurewebsites.net/products/get';
+
+  static Future<List<Product>> getProductsResponse() async {
+    await getProductsRequest();
+    print('------RESPONSE------');
+    // La peticion se hace y luego se espera la respuesta
+    var data = await http.get(
+      Uri.parse(_getResponse),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    );
+    print('------DATA------');
+    print(data.statusCode);
+    // log(data.body);
+    Response newResponse = Response.fromJson(json.decode(data.body));
+    List<Product> products = [];
+    // print(newResponse.products![0]['name']);
+    for (int i = 0; i < newResponse.products!.length; i++) {
+      products.add(Product.fromJSON(newResponse.products![i]));
     }
+    print('QTY: ${products[0].productName}');
+    return products;
   }
 }

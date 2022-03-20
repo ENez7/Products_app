@@ -1,6 +1,6 @@
 class Product {
   final String productName;
-  final String productPrice;
+  final double productPrice;
   final String productDescription;
   final String? productImage;
   final int? quantity;
@@ -17,18 +17,18 @@ class Product {
 
   factory Product.fromJSON(json) {
     return Product(
-      productName: json['productName'],
-      productPrice: json['productPrice'],
-      productDescription: json['productDescription'],
-      productImage: json['productImage'],
-      quantity: json['quantity'],
       id: json['id'],
+      productName: json['name'],
+      productDescription: json['description'],
+      productImage: json['imageUrl'],
+      productPrice: json['price'],
+      quantity: json['stock'],
     );
   }
 
   Product copyWith(
       {String? prodName,
-      String? prodPrice,
+      double? prodPrice,
       String? prodDesc,
       String? prodImg,
       int? qty,

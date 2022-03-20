@@ -20,7 +20,7 @@ class ProductsCard extends StatelessWidget {
     return GestureDetector(
       onTap: disabled ? null : onTap,
       child: Container(
-        height: 124,
+        height: 180,
         width: MediaQuery.of(context).size.width * 0.9,
         margin: const EdgeInsets.symmetric(vertical: 10.0),
         decoration: BoxDecoration(
@@ -33,7 +33,7 @@ class ProductsCard extends StatelessWidget {
             ImageContainer(),
             DataContainer(
               productName: product.productName,
-              productPrice: product.productPrice,
+              productPrice: product.productPrice.toString(),
               productDescription: product.productDescription,
             ),
           ],
@@ -83,7 +83,7 @@ class DataContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 97,
+      height: 150,
       width: 210,
       margin: EdgeInsets.fromLTRB(0, 12, 18, 12),
       decoration: BoxDecoration(
@@ -94,6 +94,8 @@ class DataContainer extends StatelessWidget {
         children: [
           Text(
             productName,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.bold,
@@ -108,16 +110,19 @@ class DataContainer extends StatelessWidget {
               color: ConstColors.fonts,
             ),
           ),
-          SizedBox(height: 7),
-          Text(
-            productDescription,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 14.0,
+          SizedBox(height: 14),
+          SizedBox(
+            height: 70,
+            child: Text(
+              productDescription,
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 14.0,
+              ),
             ),
           ),
-          SizedBox(height: 5),
+          // SizedBox(height: 5),
         ],
       ),
     );

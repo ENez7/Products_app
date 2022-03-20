@@ -9,7 +9,8 @@ class StreamData {
       final rand = Random();
       final product = Product(
         productName: 'Producto ${i + 1}',
-        productPrice: 'Bs. ${100 + rand.nextInt(100)}.00',
+        productPrice: 100 +
+            rand.nextInt(100) * 1.0, //'Bs. ${100 + rand.nextInt(100)}.00',
         productDescription:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at eros sed purus pulvinar egestas.',
         quantity: 10 + rand.nextInt(90),
@@ -18,6 +19,13 @@ class StreamData {
       // print('xd');
       await Future.delayed(Duration(milliseconds: 400));
       yield product;
+    }
+  }
+
+  static Stream<Product> streamFuture(Future<List<Product>> future) async* {
+    var products = await future;
+    for (int i = 0; i < products.length; i++) {
+      yield products[i];
     }
   }
 }

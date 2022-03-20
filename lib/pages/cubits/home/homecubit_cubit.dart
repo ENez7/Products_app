@@ -12,9 +12,10 @@ class HomeCubit extends Cubit<HomeCubitState> {
     emit(HomeCubitLoadingState());
   }
 
-  loadDataInList(Future<List<dynamic>> future, List<Product> products) async {
-    // emit(HomeCubitLoadingState());
-    products = await future as List<Product>;
+  loadDataInList(Stream stream, List<Product> products) async {
+    await for (var data in stream) {
+      products.add(data);
+    }
     emit(HomeCubitLoadedState(products));
   }
 }
