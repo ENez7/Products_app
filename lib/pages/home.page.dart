@@ -70,19 +70,39 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          heroTag: 'h1',
-          onPressed: () {
-            Navigator.of(context).pushNamed('/form');
-          },
-          child: const Text(
-            '+',
-            style: TextStyle(
-              fontSize: 36,
-              color: Colors.white,
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              heroTag: 'h1',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/form');
+              },
+              child: const Text(
+                '+',
+                style: TextStyle(
+                  fontSize: 36,
+                  color: Colors.white,
+                ),
+              ),
+              backgroundColor: ConstColors.buttons,
             ),
-          ),
-          backgroundColor: ConstColors.buttons,
+            SizedBox(height: 20),
+            FloatingActionButton(
+              heroTag: 'h2',
+              onPressed: () {
+                dataCubit.initState();
+                dataCubit.loadDataInList(
+                    StreamData.streamFuture(ApiService.getProductsResponse()),
+                    products);
+              },
+              backgroundColor: ConstColors.buttons,
+              child: Icon(
+                Icons.refresh,
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -13,6 +13,7 @@ class HomeCubit extends Cubit<HomeCubitState> {
   }
 
   loadDataInList(Stream stream, List<Product> products) async {
+    products.clear();
     await for (var data in stream) {
       products.add(data);
     }

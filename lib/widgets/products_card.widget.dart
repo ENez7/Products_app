@@ -1,6 +1,7 @@
 import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:ecommerce_platform/constants/shadows.dart';
 import 'package:ecommerce_platform/models/product.dart';
+import 'package:ecommerce_platform/utils/string.util.dart';
 import 'package:flutter/material.dart';
 
 class ProductsCard extends StatelessWidget {
@@ -59,9 +60,9 @@ class ImageContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey,
         image: DecorationImage(
-          image: NetworkImage(
-            url,
-          ),
+          image: url.isValidHttp()
+              ? NetworkImage(url)
+              : AssetImage('assets/bg.jpg') as ImageProvider,
           fit: BoxFit.fill,
         ),
       ),

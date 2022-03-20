@@ -21,7 +21,7 @@ class Product {
       productName: json['name'],
       productDescription: json['description'],
       productImage: json['imageUrl'],
-      productPrice: json['price'],
+      productPrice: json['price'] + 0.0,
       quantity: json['stock'],
     );
   }

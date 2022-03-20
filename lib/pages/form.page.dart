@@ -1,4 +1,5 @@
 import 'package:ecommerce_platform/constants/shadows.dart';
+import 'package:ecommerce_platform/services/api.service.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
@@ -13,6 +14,7 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
+  TextEditingController productIdController = TextEditingController();
   TextEditingController productNameController = TextEditingController();
   TextEditingController productDescriptionController = TextEditingController();
   TextEditingController productPriceController = TextEditingController();
@@ -22,6 +24,7 @@ class _FormPageState extends State<FormPage> {
   @override
   void initState() {
     super.initState();
+    productIdController.text = widget.product?.id ?? '';
     productNameController.text = widget.product?.productName ?? '';
     productDescriptionController.text =
         widget.product?.productDescription ?? '';
@@ -67,6 +70,11 @@ class _FormPageState extends State<FormPage> {
                     style: TextStyle(fontSize: 34.0),
                   ),
                   CustomTFF(
+                    controller: productIdController,
+                    hintText: 'ID',
+                    enable: exists,
+                  ),
+                  CustomTFF(
                     controller: productNameController,
                     hintText: 'Nombre del producto',
                   ),
@@ -107,9 +115,27 @@ class _FormPageState extends State<FormPage> {
             ),
             FloatingActionButton.extended(
               heroTag: 'btn2',
-              onPressed: () {
-                // Add logic of post
-                Navigator.of(context).pop();
+              onPressed: () async {
+                !exists
+                    ? ApiService.postProductsResponse(Product(
+                        id: productIdController.text,
+                        productName: productNameController.text,
+                        productDescription: productDescriptionController.text,
+                        productImage: productImgController.text,
+                        productPrice: double.parse(productPriceController.text),
+                        quantity: int.parse(productStockController.text),
+                      )) // POST
+                    : ApiService.putProductsResponse(Product(
+                        id: productIdController.text,
+                        productName: productNameController.text,
+                        productDescription: productDescriptionController.text,
+                        productImage: productImgController.text,
+                        productPrice: double.parse(productPriceController.text),
+                        quantity: int.parse(productStockController.text),
+                      )); // PUT
+                !exists
+                    ? Navigator.of(context).pop()
+                    : Navigator.of(context).popUntil(ModalRoute.withName('/'));
               },
               label: exists ? Text('Actualizar') : Text('Guardar'),
               backgroundColor: ConstColors.appBar,
@@ -126,11 +152,12 @@ class CustomTFF extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.hintText,
+    this.enable = false,
   }) : super(key: key);
 
   final TextEditingController controller;
   final String hintText;
-
+  final bool? enable;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -140,6 +167,7 @@ class CustomTFF extends StatelessWidget {
       ),
       child: TextFormField(
         controller: controller,
+        enabled: !enable!,
         decoration: InputDecoration(
           hintText: hintText,
           focusedBorder: UnderlineInputBorder(

@@ -1,6 +1,7 @@
 import 'package:ecommerce_platform/constants/colors.dart';
 import 'package:ecommerce_platform/models/product.dart';
 import 'package:ecommerce_platform/pages/form.page.dart';
+import 'package:ecommerce_platform/services/api.service.dart';
 import 'package:flutter/material.dart';
 import '../widgets/product_card.widget.dart';
 
@@ -38,7 +39,6 @@ class ProductPage extends StatelessWidget {
                       height: 46,
                       child: ElevatedButton(
                         onPressed: () {
-                          // TODO: Add put logic
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => FormPage(
@@ -63,7 +63,7 @@ class ProductPage extends StatelessWidget {
                       height: 46,
                       child: ElevatedButton(
                         onPressed: () {
-                          // TODO: Add delete logic
+                          ApiService.deleteProductsResponse(product.id!);
                           Navigator.of(context).pop();
                         },
                         child: Text(
