@@ -30,7 +30,7 @@ class ProductsCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            ImageContainer(),
+            ImageContainer(url: product.productImage!),
             DataContainer(
               productName: product.productName,
               productPrice: product.productPrice.toString(),
@@ -44,8 +44,10 @@ class ProductsCard extends StatelessWidget {
 }
 
 class ImageContainer extends StatelessWidget {
-  const ImageContainer({
+  String url;
+  ImageContainer({
     Key? key,
+    required this.url,
   }) : super(key: key);
 
   @override
@@ -56,10 +58,9 @@ class ImageContainer extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(18, 12, 15, 12),
       decoration: BoxDecoration(
         color: Colors.grey,
-        borderRadius: BorderRadius.circular(12),
         image: DecorationImage(
-          image: AssetImage(
-            'assets/bg.jpg',
+          image: NetworkImage(
+            url,
           ),
           fit: BoxFit.fill,
         ),

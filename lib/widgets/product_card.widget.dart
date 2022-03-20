@@ -43,7 +43,7 @@ class ProductCard extends StatelessWidget {
                   margin: EdgeInsets.symmetric(vertical: 24.0),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/bg.jpg'),
+                      image: NetworkImage(product.productImage!),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(12),
