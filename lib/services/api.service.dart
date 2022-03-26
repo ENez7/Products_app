@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class ApiService {
   // LINK CONSULTAS
   static const _request =
-      'https://functionentradaproducts.azurewebsites.net/api/products/'; // ?id=1';
+      ''; // ?id=1';
 
   static Future<void> getProductsRequest() async {
     var req = await http.get(Uri.parse(_request));
@@ -64,7 +64,7 @@ class ApiService {
   // =============================
   // GET PRODUCTS
   static const _getResponse =
-      'https://webapisalidaproducts.azurewebsites.net/products/get';
+      '';
 
   static Future<List<Product>> getProductsResponse() async {
     await getProductsRequest();
@@ -89,7 +89,7 @@ class ApiService {
 
   // POST PRODUCTS
   static const _postResponse =
-      'https://webapisalidaproducts.azurewebsites.net/products/post';
+      '';
   static Future<void> postProductsResponse(Product product) async {
     await postProductsRequest(product);
     await http.get(
@@ -104,7 +104,7 @@ class ApiService {
 
   // PUT PRODUCTS
   static const _putResponse =
-      'https://webapisalidaproducts.azurewebsites.net/products/put';
+      '';
   static Future<void> putProductsResponse(Product product) async {
     await putProductsRequest(product);
     await http.get(
@@ -119,7 +119,7 @@ class ApiService {
 
   // DELETE PRODUCTS
   static const _deleteResponse =
-      'https://webapisalidaproducts.azurewebsites.net/products/delete';
+      '';
   static Future<void> deleteProductsResponse(String id) async {
     await deleteProductsRequest(id);
     await http.get(
